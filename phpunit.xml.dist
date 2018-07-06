@@ -1,0 +1,10 @@
+<phpunit bootstrap="tests/bootstrap.php">
+    <logging>
+        <log type="json" target="logs/tests.json"/>
+    </logging>
+    <testsuites>
+      <testsuite name="all">
+        <directory>tests</directory>
+      </testsuite>
+    </testsuites>
+</phpunit>
