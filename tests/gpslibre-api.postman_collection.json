@@ -1,0 +1,229 @@
+{
+	"info": {
+		"_postman_id": "25ff9e5c-cbc9-4977-8cb3-d6f987d5db83",
+		"name": "gpslibre-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "general",
+			"description": "",
+			"item": [
+				{
+					"name": "info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "25645a41-6a5b-447a-8d34-29ce766b6c06",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{baseurl}}/info?departamento=desarrollo",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"info"
+							],
+							"query": [
+								{
+									"key": "departamento",
+									"value": "desarrollo"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "config",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1a3f0b4b-0860-4145-9db4-ddc170ceeedd",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{baseurl}}/config?departamento=desarrollo",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"config"
+							],
+							"query": [
+								{
+									"key": "departamento",
+									"value": "desarrollo"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "locations",
+			"description": "",
+			"item": [
+				{
+					"name": "crea location",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d2ab842c-e8a9-41fb-9cea-73c397c59c63",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.expect(pm.response.json().success).to.equal(true);",
+									"});",
+									"",
+									"pm.test(\"Check response\", function () {",
+									"    const location= pm.response.json().data;",
+									"    ",
+									"    pm.expect(location).to.be.an(\"object\");",
+									"    pm.expect(location.who).to.equal(\"test\");",
+									"    pm.expect(location.lat).to.equal(\"30.45\");",
+									"    pm.expect(location.lon).to.equal(\"5.65\");",
+									"    pm.expect(location.batt).to.equal(\"50\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"description": "",
+									"key": "who",
+									"type": "text",
+									"value": "test"
+								},
+								{
+									"description": "",
+									"key": "lat",
+									"type": "text",
+									"value": "30.45"
+								},
+								{
+									"description": "",
+									"key": "lon",
+									"type": "text",
+									"value": "5.65"
+								},
+								{
+									"description": "",
+									"key": "bat",
+									"type": "text",
+									"value": "50"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseurl}}/locations",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"locations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "lee locations",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6d2f14aa-1b37-4baf-85ee-a0d242f937b6",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.expect(pm.response.json().success).to.equal(true);",
+									"});",
+									"",
+									"pm.test(\"Check response\", function () {",
+									"    const locations = pm.response.json().data;",
+									"    const location= locations[0];",
+									"    ",
+									"    pm.expect(locations).to.be.an(\"array\").to.not.have.lengthOf(0);",
+									"    pm.expect(location).to.have.property(\"who\");",
+									"    pm.expect(location).to.have.property(\"lat\");",
+									"    pm.expect(location).to.have.property(\"lon\");",
+									"    pm.expect(location).to.have.property(\"batt\");",
+									"    ",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"description": "",
+									"key": "codigo",
+									"type": "text",
+									"value": "nuevo"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseurl}}/locations.json?who=test",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"locations.json"
+							],
+							"query": [
+								{
+									"key": "who",
+									"value": "test"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

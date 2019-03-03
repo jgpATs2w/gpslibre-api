@@ -15,9 +15,9 @@ function read($who, $from='', $to=''){
   return $locations;
 }
 
-function create($who, $lat, $lon, $batt='', $ts_remote=''){
-  \db\prepare("INSERT INTO locations (who, lat, lon, batt, ts_remote) VALUES (?,?,?,?,?)");
-  \db\execute([$who, $lat, $lon, $batt, $ts_remote]);
+function create($who, $lat, $lon, $batt='', $ts_remote='NULL'){
+  \db\prepare("INSERT INTO locations (who, lat, lon, batt) VALUES (?,?,?,?)");
+  \db\execute([$who, $lat, $lon, $batt]);
 
   return \db\last_id();
 }
